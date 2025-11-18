@@ -2675,8 +2675,6 @@
 //     marginTop: 30,
 //   },
 // });
-// src/screens/RegisterScreen.js
-
 import React, { useState, useRef, useEffect } from "react";
 import {
   View,
@@ -2693,7 +2691,7 @@ import {
   Alert,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { BASE_URL } from "../config";   // 🔗 yahan se backend URL aa raha hai
+import { BASE_URL } from "../config";
 
 const { width, height } = Dimensions.get("window");
 
@@ -2732,7 +2730,7 @@ export default function RegisterScreen({ navigation }) {
     ]).start();
   }, [avatarAnim, formAnim, buttonAnim]);
 
-  // 🔐 CREATE ACCOUNT → POST /auth/signup (backend)
+  // 🔐 CREATE ACCOUNT → POST /auth/signup
   const handleCreateAccount = async () => {
     if (!firstName || !lastName || !email || !password) {
       Alert.alert("Error", "Please fill all fields");
@@ -2757,7 +2755,6 @@ export default function RegisterScreen({ navigation }) {
         body: JSON.stringify(body),
       });
 
-      // response se JSON nikalna (agar ho to)
       let data = null;
       try {
         data = await response.json();
@@ -2773,7 +2770,7 @@ export default function RegisterScreen({ navigation }) {
         return;
       }
 
-      // 👉 yaha token save nahi karna, sirf success + Login pe bhejna
+      // ✅ Yaha token store NHI kar rahe
       Alert.alert(
         "Success",
         data?.message || "Account created successfully! Please login.",
@@ -2781,10 +2778,8 @@ export default function RegisterScreen({ navigation }) {
           {
             text: "OK",
             onPress: () => {
-              // ✅ Login screen ka EXACT name navigator me same hona chahiye
+              // Make sure Stack.Screen name is exactly "Login"
               navigation.replace("Login");
-              // agar tumne <Stack.Screen name="LoginScreen" ...> kiya hai to:
-              // navigation.replace("LoginScreen");
             },
           },
         ]
