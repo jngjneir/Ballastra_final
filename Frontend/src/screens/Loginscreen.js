@@ -430,7 +430,7 @@ import {
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const BASE_URL = "http://10.0.2.2:5000/api";
+const BASE_URL = "http://localhost:5000/api";
 // ⚠️ For Android emulator use 10.0.2.2
 // For iOS simulator → "http://localhost:5000/api"
 // For real device → "http://YOUR_PC_IP:5000/api"
