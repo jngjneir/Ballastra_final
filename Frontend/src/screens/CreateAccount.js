@@ -2693,8 +2693,7 @@ import {
   Alert,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-
-import { BASE_URL } from "../config"; // 👈 common base URL
+import { BASE_URL } from "../config";   // 🔗 yahan se backend URL aa raha hai
 
 const { width, height } = Dimensions.get("window");
 
@@ -2733,7 +2732,7 @@ export default function RegisterScreen({ navigation }) {
     ]).start();
   }, [avatarAnim, formAnim, buttonAnim]);
 
-  // 🔐 CREATE ACCOUNT → POST /auth/signup
+  // 🔐 CREATE ACCOUNT → POST /auth/signup (backend)
   const handleCreateAccount = async () => {
     if (!firstName || !lastName || !email || !password) {
       Alert.alert("Error", "Please fill all fields");
@@ -2758,6 +2757,7 @@ export default function RegisterScreen({ navigation }) {
         body: JSON.stringify(body),
       });
 
+      // response se JSON nikalna (agar ho to)
       let data = null;
       try {
         data = await response.json();
@@ -2773,15 +2773,19 @@ export default function RegisterScreen({ navigation }) {
         return;
       }
 
-      // 👉 IMPORTANT: yaha token save NAAHI karat
-      // user la manually login karu dya
+      // 👉 yaha token save nahi karna, sirf success + Login pe bhejna
       Alert.alert(
         "Success",
         data?.message || "Account created successfully! Please login.",
         [
           {
             text: "OK",
-            onPress: () => navigation.replace("Login"), // ⬅️ direct Login screen
+            onPress: () => {
+              // ✅ Login screen ka EXACT name navigator me same hona chahiye
+              navigation.replace("Login");
+              // agar tumne <Stack.Screen name="LoginScreen" ...> kiya hai to:
+              // navigation.replace("LoginScreen");
+            },
           },
         ]
       );
