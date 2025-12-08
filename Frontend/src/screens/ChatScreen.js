@@ -1,192 +1,1093 @@
-// import React, { useState } from 'react';
+
+// // import React from "react";
+// // import {
+// //   View,
+// //   Text,
+// //   StyleSheet,
+// //   StatusBar,
+// //   SafeAreaView,
+// //   TouchableOpacity,
+// //   TextInput,
+// //   FlatList,
+// // } from "react-native";
+// // import { LinearGradient } from "expo-linear-gradient";
+// // import Svg, { Path, Circle } from "react-native-svg";
+
+// // // --- Dummy data ---
+// // const MESSAGES = [
+// //   {
+// //     id: "1",
+// //     name: "Perfecto",
+// //     you: true,
+// //     message: "You: https://discord.gg/KH3gsJKCD",
+// //     time: "2d",
+// //     isHighlighted: true,
+// //     avatarColor: "#326BFF",
+// //   },
+// //   {
+// //     id: "2",
+// //     name: "Perfecto",
+// //     message: "perfecto: https://discord.gg/KH3gsJKCD",
+// //     time: "2d",
+// //     avatarColor: "#37C8FF",
+// //   },
+// //   {
+// //     id: "3",
+// //     name: "Perfecto",
+// //     message: "perfecto: https://discord.gg/KH3gsJKCD",
+// //     time: "2d",
+// //     avatarColor: "#00E37D",
+// //   },
+// //   {
+// //     id: "4",
+// //     name: "Perfecto",
+// //     message: "perfecto: https://discord.gg/KH3gsJKCD",
+// //     time: "4d",
+// //     avatarColor: "#FF37EC",
+// //   },
+// //   {
+// //     id: "5",
+// //     name: "Perfecto",
+// //     message: "perfecto: https://discord.gg/KH3gsJKCD",
+// //     time: "12d",
+// //     avatarColor: "#37F0FF",
+// //   },
+// //   {
+// //     id: "6",
+// //     name: "Perfecto",
+// //     message: "perfecto: https://discord.gg/KH3gsJKCD",
+// //     time: "12d",
+// //     avatarColor: "#FF7F37",
+// //   },
+// //   {
+// //     id: "7",
+// //     name: "Perfecto",
+// //     message: "perfecto: https://discord.gg/KH3gsJKCD",
+// //     time: "12d",
+// //     avatarColor: "#2F2F2F",
+// //   },
+// // ];
+
+// // // -------- SMALL SVG ICONS (header) --------
+// // const PeopleIcon = ({ size = 18 }) => (
+// //   <Svg width={size} height={size} viewBox="0 0 24 24">
+// //     <Path
+// //       d="M12 12c1.93 0 3.5-1.57 3.5-3.5S13.93 5 12 5 8.5 6.57 8.5 8.5 10.07 12 12 12zm0 1.5c-2.33 0-7 1.17-7 3.5V18a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.99c0-2.33-4.67-3.51-7-3.51z"
+// //       fill="#FFFFFF"
+// //     />
+// //   </Svg>
+// // );
+
+// // const MoreIcon = ({ size = 18 }) => (
+// //   <Svg width={size} height={size} viewBox="0 0 24 24">
+// //     <Circle cx="5" cy="12" r="1.5" fill="#FFFFFF" />
+// //     <Circle cx="12" cy="12" r="1.5" fill="#FFFFFF" />
+// //     <Circle cx="19" cy="12" r="1.5" fill="#FFFFFF" />
+// //   </Svg>
+// // );
+
+// // const SearchIcon = ({ size = 16 }) => (
+// //   <Svg width={size} height={size} viewBox="0 0 24 24">
+// //     <Path
+// //       d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79L18.5 20 20 18.5 15.5 14zm-6 0C8.01 14 6 11.99 6 9.5S8.01 5 10.5 5 15 7.01 15 9.5 12.99 14 10.5 14z"
+// //       fill="#64748B"
+// //     />
+// //   </Svg>
+// // );
+
+// // // -------- CELL COMPONENT --------
+// // const MessageItem = ({ item, onPress }) => {
+// //   if (item.isHighlighted) {
+// //     return (
+// //       <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
+// //         <LinearGradient
+// //           colors={["#3B82F6", "#22C1C3", "#8B5CF6"]}
+// //           start={{ x: 0, y: 0 }}
+// //           end={{ x: 1, y: 0 }}
+// //           style={styles.highlightWrapper}
+// //         >
+// //           <View style={styles.highlightInner}>
+// //             <View
+// //               style={[styles.avatar, { backgroundColor: item.avatarColor }]}
+// //             >
+// //               <Text style={styles.avatarText}>P</Text>
+// //             </View>
+// //             <View style={styles.messageTextContainer}>
+// //               <Text style={styles.nameText}>{item.name}</Text>
+// //               <Text numberOfLines={1} style={styles.messageText}>
+// //                 {item.message}
+// //               </Text>
+// //             </View>
+// //             <Text style={styles.timeText}>{item.time}</Text>
+// //           </View>
+// //         </LinearGradient>
+// //       </TouchableOpacity>
+// //     );
+// //   }
+
+// //   return (
+// //     <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
+// //       <View style={styles.messageRow}>
+// //         <View style={[styles.avatar, { backgroundColor: item.avatarColor }]}>
+// //           <Text style={styles.avatarText}>P</Text>
+// //         </View>
+// //         <View style={styles.messageTextContainer}>
+// //           <Text style={styles.nameText}>{item.name}</Text>
+// //           <Text numberOfLines={1} style={styles.messageSubText}>
+// //             {item.message}
+// //           </Text>
+// //         </View>
+// //         <Text style={styles.timeText}>{item.time}</Text>
+// //       </View>
+// //     </TouchableOpacity>
+// //   );
+// // };
+
+// // // ------------- MAIN SCREEN -------------
+// // export default function ChatChannelScreen({ navigation }) {
+// //   const handleOpenChat = (item) => {
+// //     // 👉 Message click -> ChannelScreen open
+// //     navigation.navigate("Channel", {
+// //       contact: item, // ChannelScreen madhe route.params.contact ne access kar
+// //     });
+// //   };
+
+// //   return (
+// //     <SafeAreaView style={styles.safe}>
+// //       <StatusBar barStyle="light-content" backgroundColor="#020617" />
+
+// //       <View style={styles.container}>
+// //         {/* HEADER */}
+// //         <View style={styles.headerRow}>
+// //           <View style={styles.titleRow}>
+// //             <Text style={styles.title}>Messages</Text>
+// //             <View style={styles.badge}>
+// //               <Text style={styles.badgeText}>15</Text>
+// //             </View>
+// //           </View>
+
+// //           <View style={styles.headerButtons}>
+// //             <TouchableOpacity style={styles.headerIconButton}>
+// //               <PeopleIcon />
+// //             </TouchableOpacity>
+// //             <TouchableOpacity style={styles.headerIconButton}>
+// //               <MoreIcon />
+// //             </TouchableOpacity>
+// //           </View>
+// //         </View>
+
+// //         {/* SEARCH */}
+// //         <View style={styles.searchRow}>
+// //           <View style={styles.searchBox}>
+// //             <SearchIcon />
+// //             <TextInput
+// //               placeholder="Search nexus, friends, messages..."
+// //               placeholderTextColor="#64748B"
+// //               style={styles.searchInput}
+// //             />
+// //           </View>
+// //           <TouchableOpacity>
+// //             <Text style={styles.filterText}>Filter</Text>
+// //           </TouchableOpacity>
+// //         </View>
+
+// //         {/* LIST */}
+// //         <FlatList
+// //           data={MESSAGES}
+// //           keyExtractor={(item) => item.id}
+// //           renderItem={({ item }) => (
+// //             <MessageItem item={item} onPress={() => handleOpenChat(item)} />
+// //           )}
+// //           contentContainerStyle={{ paddingBottom: 24 }}
+// //           showsVerticalScrollIndicator={false}
+// //         />
+// //       </View>
+// //     </SafeAreaView>
+// //   );
+// // }
+
+// // // ------------- STYLES -------------
+// // const styles = StyleSheet.create({
+// //   safe: {
+// //     flex: 1,
+// //     backgroundColor: "#020617",
+// //   },
+// //   container: {
+// //     flex: 1,
+// //     backgroundColor: "#020617",
+// //     paddingHorizontal: 20,
+// //     paddingTop: 8,
+// //   },
+
+// //   // HEADER
+// //   headerRow: {
+// //     flexDirection: "row",
+// //     alignItems: "center",
+// //     justifyContent: "space-between",
+// //     marginBottom: 16,
+// //   },
+// //   titleRow: {
+// //     flexDirection: "row",
+// //     alignItems: "center",
+// //   },
+// //   title: {
+// //     fontSize: 22,
+// //     color: "#FFFFFF",
+// //     fontWeight: "600",
+// //   },
+// //   badge: {
+// //     marginLeft: 8,
+// //     minWidth: 20,
+// //     paddingHorizontal: 6,
+// //     paddingVertical: 3,
+// //     borderRadius: 999,
+// //     backgroundColor: "#EF4444",
+// //     alignItems: "center",
+// //     justifyContent: "center",
+// //   },
+// //   badgeText: {
+// //     fontSize: 11,
+// //     color: "#FFFFFF",
+// //     fontWeight: "600",
+// //   },
+// //   headerButtons: {
+// //     flexDirection: "row",
+// //   },
+// //   headerIconButton: {
+// //     width: 34,
+// //     height: 34,
+// //     borderRadius: 17,
+// //     borderWidth: 1,
+// //     borderColor: "#1E293B",
+// //     alignItems: "center",
+// //     justifyContent: "center",
+// //     backgroundColor: "#020617",
+// //     marginLeft: 10,
+// //   },
+
+// //   // SEARCH
+// //   searchRow: {
+// //     flexDirection: "row",
+// //     alignItems: "center",
+// //     marginBottom: 18,
+// //   },
+// //   searchBox: {
+// //     flexDirection: "row",
+// //     alignItems: "center",
+// //     flex: 1,
+// //     backgroundColor: "#020617",
+// //     borderRadius: 999,
+// //     borderWidth: 1,
+// //     borderColor: "#1E293B",
+// //     paddingHorizontal: 14,
+// //     height: 40,
+// //   },
+// //   searchInput: {
+// //     flex: 1,
+// //     marginLeft: 8,
+// //     color: "#E2E8F0",
+// //     paddingVertical: 0,
+// //     fontSize: 14,
+// //   },
+// //   filterText: {
+// //     marginLeft: 12,
+// //     color: "#64748B",
+// //     fontSize: 13,
+// //   },
+
+// //   // LIST
+// //   highlightWrapper: {
+// //     borderRadius: 18,
+// //     padding: 1.5,
+// //     marginBottom: 10,
+// //   },
+// //   highlightInner: {
+// //     flexDirection: "row",
+// //     alignItems: "center",
+// //     backgroundColor: "#020617",
+// //     borderRadius: 16,
+// //     paddingHorizontal: 12,
+// //     paddingVertical: 10,
+// //   },
+// //   messageRow: {
+// //     flexDirection: "row",
+// //     alignItems: "center",
+// //     paddingVertical: 10,
+// //   },
+// //   avatar: {
+// //     width: 46,
+// //     height: 46,
+// //     borderRadius: 16,
+// //     alignItems: "center",
+// //     justifyContent: "center",
+// //   },
+// //   avatarText: {
+// //     color: "#FFFFFF",
+// //     fontWeight: "700",
+// //     fontSize: 18,
+// //   },
+// //   messageTextContainer: {
+// //     flex: 1,
+// //     marginHorizontal: 10,
+// //   },
+// //   nameText: {
+// //     color: "#FFFFFF",
+// //     fontSize: 15,
+// //     fontWeight: "600",
+// //   },
+// //   messageText: {
+// //     color: "#E2E8F0",
+// //     fontSize: 12,
+// //     marginTop: 2,
+// //   },
+// //   messageSubText: {
+// //     color: "#64748B",
+// //     fontSize: 12,
+// //     marginTop: 2,
+// //   },
+// //   timeText: {
+// //     color: "#64748B",
+// //     fontSize: 12,
+// //   },
+// // });
+// import React from "react";
 // import {
 //   View,
 //   Text,
-//   TextInput,
-//   TouchableOpacity,
-//   FlatList,
 //   StyleSheet,
-//   KeyboardAvoidingView,
+//   StatusBar,
+//   SafeAreaView,
+//   TouchableOpacity,
+//   TextInput,
+//   FlatList,
 //   Platform,
-//   Keyboard,
-//   TouchableWithoutFeedback,
-// } from 'react-native';
+// } from "react-native";
+// import { LinearGradient } from "expo-linear-gradient";
+// import Svg, { Path, Circle } from "react-native-svg";
 
-// export default function ChatScreen({ route }) {
-//   const { channel } = route.params || {};
-//   const [messages, setMessages] = useState([]);
-//   const [input, setInput] = useState('');
+// // --- Dummy data ---
+// const MESSAGES = [
+//   {
+//     id: "1",
+//     name: "Perfecto",
+//     you: true,
+//     message: "You: https://discord.gg/KH3gsJKCD",
+//     time: "2d",
+//     isHighlighted: true,
+//     avatarColor: "#326BFF",
+//   },
+//   {
+//     id: "2",
+//     name: "Perfecto",
+//     message: "perfecto: https://discord.gg/KH3gsJKCD",
+//     time: "2d",
+//     avatarColor: "#37C8FF",
+//   },
+//   {
+//     id: "3",
+//     name: "Perfecto",
+//     message: "perfecto: https://discord.gg/KH3gsJKCD",
+//     time: "2d",
+//     avatarColor: "#00E37D",
+//   },
+//   {
+//     id: "4",
+//     name: "Perfecto",
+//     message: "perfecto: https://discord.gg/KH3gsJKCD",
+//     time: "4d",
+//     avatarColor: "#FF37EC",
+//   },
+//   {
+//     id: "5",
+//     name: "Perfecto",
+//     message: "perfecto: https://discord.gg/KH3gsJKCD",
+//     time: "12d",
+//     avatarColor: "#37F0FF",
+//   },
+//   {
+//     id: "6",
+//     name: "Perfecto",
+//     message: "perfecto: https://discord.gg/KH3gsJKCD",
+//     time: "12d",
+//     avatarColor: "#FF7F37",
+//   },
+//   {
+//     id: "7",
+//     name: "Perfecto",
+//     message: "perfecto: https://discord.gg/KH3gsJKCD",
+//     time: "12d",
+//     avatarColor: "#2F2F2F",
+//   },
+// ];
 
-//   const sendMessage = () => {
-//     if (!input.trim()) return;
-//     const newMessage = { id: Date.now().toString(), text: input };
-//     setMessages((prev) => [...prev, newMessage]);
-//     setInput('');
+// // -------- SMALL SVG ICONS (header) --------
+// const PeopleIcon = ({ size = 18 }) => (
+//   <Svg width={size} height={size} viewBox="0 0 24 24">
+//     <Path
+//       d="M12 12c1.93 0 3.5-1.57 3.5-3.5S13.93 5 12 5 8.5 6.57 8.5 8.5 10.07 12 12 12zm0 1.5c-2.33 0-7 1.17-7 3.5V18a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.99c0-2.33-4.67-3.51-7-3.51z"
+//       fill="#FFFFFF"
+//     />
+//   </Svg>
+// );
+
+// const MoreIcon = ({ size = 18 }) => (
+//   <Svg width={size} height={size} viewBox="0 0 24 24">
+//     <Circle cx="5" cy="12" r="1.5" fill="#FFFFFF" />
+//     <Circle cx="12" cy="12" r="1.5" fill="#FFFFFF" />
+//     <Circle cx="19" cy="12" r="1.5" fill="#FFFFFF" />
+//   </Svg>
+// );
+
+// const SearchIcon = ({ size = 16 }) => (
+//   <Svg width={size} height={size} viewBox="0 0 24 24">
+//     <Path
+//       d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79L18.5 20 20 18.5 15.5 14zm-6 0C8.01 14 6 11.99 6 9.5S8.01 5 10.5 5 15 7.01 15 9.5 12.99 14 10.5 14z"
+//       fill="#64748B"
+//     />
+//   </Svg>
+// );
+
+// // -------- CELL COMPONENT --------
+// const MessageItem = ({ item, onPress }) => {
+//   if (item.isHighlighted) {
+//     return (
+//       <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
+//         <LinearGradient
+//           colors={["#3B82F6", "#22C1C3", "#8B5CF6"]}
+//           start={{ x: 0, y: 0 }}
+//           end={{ x: 1, y: 0 }}
+//           style={styles.highlightWrapper}
+//         >
+//           <View style={styles.highlightInner}>
+//             <View
+//               style={[styles.avatar, { backgroundColor: item.avatarColor }]}
+//             >
+//               <Text style={styles.avatarText}>P</Text>
+//             </View>
+//             <View style={styles.messageTextContainer}>
+//               <Text style={styles.nameText}>{item.name}</Text>
+//               <Text numberOfLines={1} style={styles.messageText}>
+//                 {item.message}
+//               </Text>
+//             </View>
+//             <Text style={styles.timeText}>{item.time}</Text>
+//           </View>
+//         </LinearGradient>
+//       </TouchableOpacity>
+//     );
+//   }
+
+//   return (
+//     <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
+//       <View style={styles.messageRow}>
+//         <View style={[styles.avatar, { backgroundColor: item.avatarColor }]}>
+//           <Text style={styles.avatarText}>P</Text>
+//         </View>
+//         <View style={styles.messageTextContainer}>
+//           <Text style={styles.nameText}>{item.name}</Text>
+//           <Text numberOfLines={1} style={styles.messageSubText}>
+//             {item.message}
+//           </Text>
+//         </View>
+//         <Text style={styles.timeText}>{item.time}</Text>
+//       </View>
+//     </TouchableOpacity>
+//   );
+// };
+
+// // ------------- MAIN SCREEN -------------
+// export default function ChatChannelScreen({ navigation }) {
+//   const handleOpenChat = (item) => {
+//     // 👉 Message click -> ChannelScreen open
+//     navigation.navigate("Channel", {
+//       contact: item, // ChannelScreen madhe route.params.contact ne access kar
+//     });
 //   };
 
 //   return (
-//     <KeyboardAvoidingView
-//       style={{ flex: 1 }}
-//       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-//     >
-//       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-//         <View style={styles.container}>
-//           <Text style={styles.header}>#{channel}</Text>
+//     <SafeAreaView style={styles.safe}>
+//       {/* StatusBar iOS + Android दोन्हीकडे safe background */}
+//       <StatusBar barStyle="light-content" backgroundColor="#020617" />
 
-//           <FlatList
-//             data={messages}
-//             keyExtractor={(item) => item.id}
-//             renderItem={({ item }) => (
-//               <View style={styles.messageBubble}>
-//                 <Text style={styles.messageText}>{item.text}</Text>
-//               </View>
-//             )}
-//             contentContainerStyle={{ padding: 16 }}
-//           />
+//       <View style={styles.container}>
+//         {/* HEADER */}
+//         <View style={styles.headerRow}>
+//           <View style={styles.titleRow}>
+//             <Text style={styles.title}>Messages</Text>
+//             <View style={styles.badge}>
+//               <Text style={styles.badgeText}>15</Text>
+//             </View>
+//           </View>
 
-//           <View style={styles.inputContainer}>
-//             <TextInput
-//               value={input}
-//               onChangeText={setInput}
-//               placeholder="Type a message..."
-//               style={styles.input}
-//             />
-//             <TouchableOpacity onPress={sendMessage} style={styles.sendButton}>
-//               <Text style={styles.sendText}>Send</Text>
+//           <View style={styles.headerButtons}>
+//             <TouchableOpacity style={styles.headerIconButton}>
+//               <PeopleIcon />
+//             </TouchableOpacity>
+//             <TouchableOpacity style={styles.headerIconButton}>
+//               <MoreIcon />
 //             </TouchableOpacity>
 //           </View>
 //         </View>
-//       </TouchableWithoutFeedback>
-//     </KeyboardAvoidingView>
+
+//         {/* SEARCH */}
+//         <View style={styles.searchRow}>
+//           <View style={styles.searchBox}>
+//             <SearchIcon />
+//             <TextInput
+//               placeholder="Search nexus, friends, messages..."
+//               placeholderTextColor="#64748B"
+//               style={styles.searchInput}
+//             />
+//           </View>
+//           <TouchableOpacity>
+//             <Text style={styles.filterText}>Filter</Text>
+//           </TouchableOpacity>
+//         </View>
+
+//         {/* LIST */}
+//         <FlatList
+//           data={MESSAGES}
+//           keyExtractor={(item) => item.id}
+//           renderItem={({ item }) => (
+//             <MessageItem item={item} onPress={() => handleOpenChat(item)} />
+//           )}
+//           contentContainerStyle={styles.listContent}
+//           showsVerticalScrollIndicator={false}
+//         />
+//       </View>
+//     </SafeAreaView>
 //   );
 // }
 
+// // ------------- STYLES -------------
 // const styles = StyleSheet.create({
-//   container: { flex: 1, backgroundColor: '#fff' },
-//   header: {
-//     fontSize: 20,
-//     fontWeight: 'bold',
-//     padding: 16,
-//     backgroundColor: '#0a84ff',
-//     color: '#fff',
-//   },
-//   messageBubble: {
-//     backgroundColor: '#f0f0f0',
-//     padding: 12,
-//     borderRadius: 10,
-//     marginBottom: 10,
-//     alignSelf: 'flex-start',
-//   },
-//   messageText: { fontSize: 16 },
-//   inputContainer: {
-//     flexDirection: 'row',
-//     padding: 10,
-//     borderTopWidth: 1,
-//     borderColor: '#ddd',
-//     alignItems: 'center',
-//   },
-//   input: {
+//   safe: {
 //     flex: 1,
-//     padding: 10,
+//     backgroundColor: "#020617",
+//   },
+//   container: {
+//     flex: 1,
+//     backgroundColor: "#020617",
+//     paddingHorizontal: 20,
+//     // Android वर status bar खाली content लपणार नाही म्हणून
+//     paddingTop:
+//       Platform.OS === "android"
+//         ? (StatusBar.currentHeight || 0) + 8
+//         : 8,
+//   },
+
+//   // HEADER
+//   headerRow: {
+//     flexDirection: "row",
+//     alignItems: "center",
+//     justifyContent: "space-between",
+//     marginBottom: 16,
+//   },
+//   titleRow: {
+//     flexDirection: "row",
+//     alignItems: "center",
+//   },
+//   title: {
+//     fontSize: 22,
+//     color: "#FFFFFF",
+//     fontWeight: "600",
+//   },
+//   badge: {
+//     marginLeft: 8,
+//     minWidth: 20,
+//     paddingHorizontal: 6,
+//     paddingVertical: 3,
+//     borderRadius: 999,
+//     backgroundColor: "#EF4444",
+//     alignItems: "center",
+//     justifyContent: "center",
+//   },
+//   badgeText: {
+//     fontSize: 11,
+//     color: "#FFFFFF",
+//     fontWeight: "600",
+//   },
+//   headerButtons: {
+//     flexDirection: "row",
+//   },
+//   headerIconButton: {
+//     width: 34,
+//     height: 34,
+//     borderRadius: 17,
 //     borderWidth: 1,
-//     borderColor: '#ddd',
-//     borderRadius: 25,
-//     marginRight: 10,
+//     borderColor: "#1E293B",
+//     alignItems: "center",
+//     justifyContent: "center",
+//     backgroundColor: "#020617",
+//     marginLeft: 10,
 //   },
-//   sendButton: {
-//     backgroundColor: '#0a84ff',
+
+//   // SEARCH
+//   searchRow: {
+//     flexDirection: "row",
+//     alignItems: "center",
+//     marginBottom: 18,
+//   },
+//   searchBox: {
+//     flexDirection: "row",
+//     alignItems: "center",
+//     flex: 1,
+//     backgroundColor: "#020617",
+//     borderRadius: 999,
+//     borderWidth: 1,
+//     borderColor: "#1E293B",
+//     paddingHorizontal: 14,
+//     height: 40,
+//   },
+//   searchInput: {
+//     flex: 1,
+//     marginLeft: 8,
+//     color: "#E2E8F0",
+//     paddingVertical: 0,
+//     fontSize: 14,
+//   },
+//   filterText: {
+//     marginLeft: 12,
+//     color: "#64748B",
+//     fontSize: 13,
+//   },
+
+//   // LIST
+//   listContent: {
+//     paddingBottom: Platform.OS === "ios" ? 24 + 16 : 24,
+//   },
+//   highlightWrapper: {
+//     borderRadius: 18,
+//     padding: 1.5,
+//     marginBottom: 10,
+//   },
+//   highlightInner: {
+//     flexDirection: "row",
+//     alignItems: "center",
+//     backgroundColor: "#020617",
+//     borderRadius: 16,
+//     paddingHorizontal: 12,
 //     paddingVertical: 10,
-//     paddingHorizontal: 18,
-//     borderRadius: 25,
 //   },
-//   sendText: { color: '#fff', fontWeight: 'bold' },
+//   messageRow: {
+//     flexDirection: "row",
+//     alignItems: "center",
+//     paddingVertical: 10,
+//   },
+//   avatar: {
+//     width: 46,
+//     height: 46,
+//     borderRadius: 16,
+//     alignItems: "center",
+//     justifyContent: "center",
+//   },
+//   avatarText: {
+//     color: "#FFFFFF",
+//     fontWeight: "700",
+//     fontSize: 18,
+//   },
+//   messageTextContainer: {
+//     flex: 1,
+//     marginHorizontal: 10,
+//   },
+//   nameText: {
+//     color: "#FFFFFF",
+//     fontSize: 15,
+//     fontWeight: "600",
+//   },
+//   messageText: {
+//     color: "#E2E8F0",
+//     fontSize: 12,
+//     marginTop: 2,
+//   },
+//   messageSubText: {
+//     color: "#64748B",
+//     fontSize: 12,
+//     marginTop: 2,
+//   },
+//   timeText: {
+//     color: "#64748B",
+//     fontSize: 12,
+//   },
 // });
-// src/screens/ChatScreen.js
-import React, { useState } from 'react';
+import React from "react";
 import {
   View,
   Text,
-  TextInput,
-  TouchableOpacity,
-  FlatList,
-  KeyboardAvoidingView,
-  Platform,
   StyleSheet,
-} from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+  StatusBar,
+  TouchableOpacity,
+  TextInput,
+  FlatList,
+  Platform,
+} from "react-native";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
+import { LinearGradient } from "expo-linear-gradient";
+import Svg, { Path, Circle } from "react-native-svg";
 
-export default function ChatScreen({ route }) {
-  const { channel } = route.params || {};
-  const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState('');
+// --- Dummy data ---
+const MESSAGES = [
+  {
+    id: "1",
+    name: "Perfecto",
+    you: true,
+    message: "You: https://discord.gg/KH3gsJKCD",
+    time: "2d",
+    isHighlighted: true,
+    avatarColor: "#326BFF",
+  },
+  {
+    id: "2",
+    name: "Perfecto",
+    message: "perfecto: https://discord.gg/KH3gsJKCD",
+    time: "2d",
+    avatarColor: "#37C8FF",
+  },
+  {
+    id: "3",
+    name: "Perfecto",
+    message: "perfecto: https://discord.gg/KH3gsJKCD",
+    time: "2d",
+    avatarColor: "#00E37D",
+  },
+  {
+    id: "4",
+    name: "Perfecto",
+    message: "perfecto: https://discord.gg/KH3gsJKCD",
+    time: "4d",
+    avatarColor: "#FF37EC",
+  },
+  {
+    id: "5",
+    name: "Perfecto",
+    message: "perfecto: https://discord.gg/KH3gsJKCD",
+    time: "12d",
+    avatarColor: "#37F0FF",
+  },
+  {
+    id: "6",
+    name: "Perfecto",
+    message: "perfecto: https://discord.gg/KH3gsJKCD",
+    time: "12d",
+    avatarColor: "#FF7F37",
+  },
+  {
+    id: "7",
+    name: "Perfecto",
+    message: "perfecto: https://discord.gg/KH3gsJKCD",
+    time: "12d",
+    avatarColor: "#2F2F2F",
+  },
+];
 
-  const sendMessage = () => {
-    if (!input.trim()) return;
-    setMessages([...messages, { id: Date.now().toString(), text: input }]);
-    setInput('');
+// -------- SMALL SVG ICONS (header) --------
+const PeopleIcon = ({ size = 18 }) => (
+  <Svg width={size} height={size} viewBox="0 0 24 24">
+    <Path
+      d="M12 12c1.93 0 3.5-1.57 3.5-3.5S13.93 5 12 5 8.5 6.57 8.5 8.5 10.07 12 12 12zm0 1.5c-2.33 0-7 1.17-7 3.5V18a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.99c0-2.33-4.67-3.51-7-3.51z"
+      fill="#FFFFFF"
+    />
+  </Svg>
+);
+
+const MoreIcon = ({ size = 18 }) => (
+  <Svg width={size} height={size} viewBox="0 0 24 24">
+    <Circle cx="5" cy="12" r="1.5" fill="#FFFFFF" />
+    <Circle cx="12" cy="12" r="1.5" fill="#FFFFFF" />
+    <Circle cx="19" cy="12" r="1.5" fill="#FFFFFF" />
+  </Svg>
+);
+
+const SearchIcon = ({ size = 16 }) => (
+  <Svg width={size} height={size} viewBox="0 0 24 24">
+    <Path
+      d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79L18.5 20 20 18.5 15.5 14zm-6 0C8.01 14 6 11.99 6 9.5S8.01 5 10.5 5 15 7.01 15 9.5 12.99 14 10.5 14z"
+      fill="#64748B"
+    />
+  </Svg>
+);
+
+// -------- CELL COMPONENT --------
+const MessageItem = ({ item, onPress }) => {
+  if (item.isHighlighted) {
+    return (
+      <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
+        <LinearGradient
+          colors={["#3B82F6", "#22C1C3", "#8B5CF6"]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          style={styles.highlightWrapper}
+        >
+          <View style={styles.highlightInner}>
+            <View
+              style={[styles.avatar, { backgroundColor: item.avatarColor }]}
+            >
+              <Text style={styles.avatarText}>P</Text>
+            </View>
+            <View style={styles.messageTextContainer}>
+              <Text style={styles.nameText}>{item.name}</Text>
+              <Text numberOfLines={1} style={styles.messageText}>
+                {item.message}
+              </Text>
+            </View>
+            <Text style={styles.timeText}>{item.time}</Text>
+          </View>
+        </LinearGradient>
+      </TouchableOpacity>
+    );
+  }
+
+  return (
+    <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
+      <View style={styles.messageRow}>
+        <View style={[styles.avatar, { backgroundColor: item.avatarColor }]}>
+          <Text style={styles.avatarText}>P</Text>
+        </View>
+        <View style={styles.messageTextContainer}>
+          <Text style={styles.nameText}>{item.name}</Text>
+          <Text numberOfLines={1} style={styles.messageSubText}>
+            {item.message}
+          </Text>
+        </View>
+        <Text style={styles.timeText}>{item.time}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
+
+// ---------- MAIN SCREEN ----------
+function ChatChannelInner({ navigation }) {
+  const handleOpenChat = (item) => {
+    navigation.navigate("Channel", {
+      contact: item,
+    });
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.container}
-    >
-      <Text style={styles.header}>{channel}</Text>
-      <FlatList
-        data={messages}
-        renderItem={({ item }) => (
-          <View style={styles.messageBubble}>
-            <Text style={styles.messageText}>{item.text}</Text>
+    <View style={styles.container}>
+      {/* HEADER */}
+      <View style={styles.headerRow}>
+        <View style={styles.titleRow}>
+          <Text style={styles.title}>Messages</Text>
+          <View style={styles.badge}>
+            <Text style={styles.badgeText}>15</Text>
           </View>
-        )}
-        keyExtractor={item => item.id}
-      />
+        </View>
 
-      {/* Input Box */}
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Type a message..."
-          value={input}
-          onChangeText={setInput}
-        />
-        <TouchableOpacity onPress={sendMessage} style={styles.sendButton}>
-          <Ionicons name="send" size={20} color="#fff" />
+        <View style={styles.headerButtons}>
+          <TouchableOpacity style={styles.headerIconButton}>
+            <PeopleIcon />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.headerIconButton}>
+            <MoreIcon />
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      {/* SEARCH */}
+      <View style={styles.searchRow}>
+        <View style={styles.searchBox}>
+          <SearchIcon />
+          <TextInput
+            placeholder="Search nexus, friends, messages..."
+            placeholderTextColor="#64748B"
+            style={styles.searchInput}
+          />
+        </View>
+        <TouchableOpacity>
+          <Text style={styles.filterText}>Filter</Text>
         </TouchableOpacity>
       </View>
-    </KeyboardAvoidingView>
+
+      {/* LIST */}
+      <FlatList
+        data={MESSAGES}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <MessageItem item={item} onPress={() => handleOpenChat(item)} />
+        )}
+        contentContainerStyle={styles.listContent}
+        showsVerticalScrollIndicator={false}
+      />
+    </View>
   );
 }
 
+export default function ChatChannelScreen({ navigation }) {
+  const insets = useSafeAreaInsets();
+
+  // Android साठी fallback – जर insets.top = 0 असेल तर StatusBar height वापर
+  const androidTopPad =
+    Platform.OS === "android" && insets.top === 0
+      ? (StatusBar.currentHeight || 0) + 4
+      : 0;
+
+  return (
+    <View style={[styles.root, { paddingTop: androidTopPad }]}>
+      <StatusBar
+        barStyle="light-content"
+        translucent
+        backgroundColor="transparent"
+      />
+
+      <SafeAreaView
+        style={styles.safe}
+        edges={["top", "left", "right", "bottom"]}
+      >
+        <ChatChannelInner navigation={navigation} />
+      </SafeAreaView>
+    </View>
+  );
+}
+
+// ------------- STYLES -------------
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#fff', padding: 15 },
-  header: { fontSize: 18, fontWeight: '600', marginBottom: 10 },
-  messageBubble: {
-    backgroundColor: '#007AFF',
-    padding: 10,
-    borderRadius: 8,
-    marginVertical: 4,
-    alignSelf: 'flex-start',
+  root: {
+    flex: 1,
+    backgroundColor: "#020617",
   },
-  messageText: { color: '#fff', fontSize: 15 },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderTopWidth: 1,
-    borderColor: '#e5e7eb',
+  safe: {
+    flex: 1,
+    backgroundColor: "#020617",
+  },
+  container: {
+    flex: 1,
+    backgroundColor: "#020617",
+    paddingHorizontal: 20,
     paddingTop: 8,
   },
-  input: {
-    flex: 1,
-    backgroundColor: '#f3f4f6',
-    borderRadius: 20,
-    paddingHorizontal: 15,
-    paddingVertical: 8,
-    marginRight: 10,
+
+  // HEADER
+  headerRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 16,
   },
-  sendButton: {
-    backgroundColor: '#007AFF',
-    borderRadius: 20,
-    padding: 10,
+  titleRow: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  title: {
+    fontSize: 22,
+    color: "#FFFFFF",
+    fontWeight: "600",
+  },
+  badge: {
+    marginLeft: 8,
+    minWidth: 20,
+    paddingHorizontal: 6,
+    paddingVertical: 3,
+    borderRadius: 999,
+    backgroundColor: "#EF4444",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  badgeText: {
+    fontSize: 11,
+    color: "#FFFFFF",
+    fontWeight: "600",
+  },
+  headerButtons: {
+    flexDirection: "row",
+  },
+  headerIconButton: {
+    width: 34,
+    height: 34,
+    borderRadius: 17,
+    borderWidth: 1,
+    borderColor: "#1E293B",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#020617",
+    marginLeft: 10,
+  },
+
+  // SEARCH
+  searchRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 18,
+  },
+  searchBox: {
+    flexDirection: "row",
+    alignItems: "center",
+    flex: 1,
+    backgroundColor: "#020617",
+    borderRadius: 999,
+    borderWidth: 1,
+    borderColor: "#1E293B",
+    paddingHorizontal: 14,
+    height: 40,
+  },
+  searchInput: {
+    flex: 1,
+    marginLeft: 8,
+    color: "#E2E8F0",
+    paddingVertical: 0,
+    fontSize: 14,
+  },
+  filterText: {
+    marginLeft: 12,
+    color: "#64748B",
+    fontSize: 13,
+  },
+
+  // LIST
+  listContent: {
+    paddingBottom: Platform.OS === "ios" ? 32 : 20,
+  },
+  highlightWrapper: {
+    borderRadius: 18,
+    padding: 1.5,
+    marginBottom: 10,
+  },
+  highlightInner: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#020617",
+    borderRadius: 16,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+  },
+  messageRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 10,
+  },
+  avatar: {
+    width: 46,
+    height: 46,
+    borderRadius: 16,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  avatarText: {
+    color: "#FFFFFF",
+    fontWeight: "700",
+    fontSize: 18,
+  },
+  messageTextContainer: {
+    flex: 1,
+    marginHorizontal: 10,
+  },
+  nameText: {
+    color: "#FFFFFF",
+    fontSize: 15,
+    fontWeight: "600",
+  },
+  messageText: {
+    color: "#E2E8F0",
+    fontSize: 12,
+    marginTop: 2,
+  },
+  messageSubText: {
+    color: "#64748B",
+    fontSize: 12,
+    marginTop: 2,
+  },
+  timeText: {
+    color: "#64748B",
+    fontSize: 12,
   },
 });
