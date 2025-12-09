@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const nexusCtrl = require('../controllers/nexusController');
-const auth = require('../middleware/auth'); // your JWT middleware
+const auth = require('../iddmleware/auth'); //JWT middleware
 
 router.post('/', auth, nexusCtrl.createNexus);       // POST /api/nexus
 router.get('/my', auth, nexusCtrl.getMyNexus);       // GET /api/nexus/my
