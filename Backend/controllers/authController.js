@@ -1,8 +1,9 @@
 import bcrypt from 'bcryptjs';
 import pool from '../config/db.js'; 
 import jwt from 'jsonwebtoken';
-import { createUser, findUserByEmail } from '../models/userModel.js';
+import { createUser, findUserByEmail, findUserByAppleId, createAppleUser } from '../models/userModel.js';
 import { generateToken } from '../utils/generateToken.js';
+import appleService from "../services/appleAuthService.js";
 
 export const signup = async (req, res) => {
     try {
@@ -69,5 +70,55 @@ export const login = async (req, res) => {
     console.error("Login Error:", error);
     res.status(500).json({ message: "Server error" });
   }
+};
+
+
+
+export const appleLogin = async (req, res) => {
+    try {
+        const { id_token } = req.body;
+
+        if (!id_token) {
+            return res.status(400).json({ message: "id_token is required" });
+        }
+
+        // 1. Verify Apple Token
+        const appleData = await appleService.verifyIdToken(id_token);
+
+        const appleId = appleData.sub;
+        const email = appleData.email || null;
+
+        // 2. Check if user exists by apple_id
+        let user = await findUserByAppleId(appleId);
+
+        if (!user) {
+            // If not found by appleId but email exists, attach appleId
+            if (email) {
+                const existingEmailUser = await findUserByEmail(email);
+
+                if (existingEmailUser) {
+                    user = await attachAppleId(existingEmailUser.id, appleId);
+                }
+            }
+
+            // If still no user → create new
+            if (!user) {
+                user = await createUserWithApple(email, appleId);
+            }
+        }
+
+        // 3. Generate JWT
+        const token = generateToken(user.id);
+
+        return res.json({
+            message: "Apple login success",
+            token,
+            user
+        });
+
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Apple login failed" });
+    }
 };
 
